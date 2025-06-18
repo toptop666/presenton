@@ -6,6 +6,7 @@ from langchain_openai import ChatOpenAI
 
 from ppt_config_generator.models import PresentationTitlesModel
 from ppt_generator.fix_validation_errors import get_validated_response
+from llm_usage_mask import get_model
 
 user_prompt_text = {
     "type": "text",
@@ -66,9 +67,7 @@ async def generate_ppt_titles(
     language: Optional[str] = None,
 ) -> PresentationTitlesModel:
     model = (
-        ChatOpenAI(model="gpt-4.1-nano")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        get_model()
     ).with_structured_output(PresentationTitlesModel.model_json_schema())
 
     chain = get_prompt_template() | model

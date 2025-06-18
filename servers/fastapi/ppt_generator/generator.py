@@ -4,7 +4,9 @@ from typing import AsyncIterator, List
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessageChunk
+
 from ppt_generator.models.llm_models import LLMPresentationModel
+from llm_usage_mask import get_model
 
 CREATE_PRESENTATION_PROMPT = """
                 You're a professional presenter with years of experience in creating clear and engaging presentations. 
@@ -88,9 +90,7 @@ def generate_presentation_stream(
     user_message = HumanMessage(user_message.replace("-|0|-", "\n"))
 
     model = (
-        ChatOpenAI(model="gpt-4.1")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        get_model()
     )
 
     return model.astream([system_prompt, user_message])

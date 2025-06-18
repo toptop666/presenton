@@ -4,6 +4,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 
+from llm_usage_mask import get_model
+
 # search_tool = DuckDuckGoSearchRun(
 #     api_wrapper=DuckDuckGoSearchAPIWrapper(max_results=50)
 # )
@@ -40,9 +42,7 @@ prompt_template = ChatPromptTemplate.from_messages(
 
 async def get_report(query: str, language: Optional[str]):
     model = (
-        ChatOpenAI(model="gpt-4.1-nano")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        get_model()
     )
     chain = prompt_template | model
 

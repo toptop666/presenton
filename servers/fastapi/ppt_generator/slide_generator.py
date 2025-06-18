@@ -11,6 +11,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from ppt_generator.models.other_models import SlideType, SlideTypeModel
 from ppt_generator.models.slide_model import SlideModel
+from llm_usage_mask import get_model
 
 
 prompt_template_from_slide = ChatPromptTemplate.from_messages(
@@ -92,9 +93,7 @@ async def get_edited_slide_content_model(
     language: Optional[str] = None,
 ):
     model = (
-        ChatOpenAI(model="gpt-4.1-mini")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        get_model()
     )
 
     content_type_model_type = CONTENT_TYPE_MAPPING[slide_type]
@@ -121,9 +120,7 @@ async def get_slide_type_from_prompt(
 ) -> SlideTypeModel:
 
     model = (
-        ChatOpenAI(model="gpt-4.1-mini")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        get_model()
     )
 
     chain = prompt_template_from_slide_type | model.with_structured_output(
