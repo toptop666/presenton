@@ -8,7 +8,7 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessageChunk
 from ppt_generator.models.llm_models import LLMPresentationModel
 from llm_usage_mask import get_model
 
-CREATE_PRESENTATION_PROMPT = """
+CREATE_PRESENTATION_PROMPT = f"""
                 You're a professional presenter with years of experience in creating clear and engaging presentations. 
 
                 Create a presentation using the provided slide titles, images, and additional data, following specified steps and guidelines. 
@@ -72,6 +72,7 @@ CREATE_PRESENTATION_PROMPT = """
                 **Go through notes and steps and make sure they are all followed. Rule breaks are strictly not allowed.**
 """
 
+DONT_CREATE_IMAGES = "Do not use types which include images. so, do not use type 4 and 1. do not create images. for the first slide, use type 2"
 
 def generate_presentation_stream(
     titles: List[str],
@@ -83,7 +84,12 @@ def generate_presentation_stream(
 
     schema = LLMPresentationModel.model_json_schema()
 
-    system_prompt = f"{CREATE_PRESENTATION_PROMPT} -|0|--|0|- Follow this schema while giving out response: {schema}. Make description short and obey the character limits. Output should be in JSON format. Give out only JSON, nothing else."
+    system_prompt = ""
+    if os.getenv("USE_IMAGES") == 'yes':
+        system_prompt = f"{CREATE_PRESENTATION_PROMPT} -|0|--|0|- Follow this schema while giving out response: {schema}. Make description short and obey the character limits. Output should be in JSON format. Give out only JSON, nothing else."
+    else:
+        system_prompt = f"{CREATE_PRESENTATION_PROMPT}-|0|-{DONT_CREATE_IMAGES}-|0|--|0|- Follow this schema while giving out response: {schema}. Make description short and obey the character limits. Output should be in JSON format. Give out only JSON, nothing else."
+
     system_prompt = SystemMessage(system_prompt.replace("-|0|-", "\n"))
 
     user_message = f"Prompt: {prompt}-|0|--|0|- Number of Slides: {n_slides}-|0|--|0|- Presentation Language: {language} -|0|--|0|- Slide Titles: {titles} -|0|--|0|- Reference Document: {summary}"
