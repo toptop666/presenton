@@ -10,6 +10,8 @@ import {
 import React from "react";
 import Link from "next/link";
 
+const showSettings = process.env.NEXT_PUBLIC_SHOW_SETTINGS === "true";
+
 const UserAccount = () => {
   return (
     <Popover>
@@ -42,17 +44,19 @@ const UserAccount = () => {
               Dashboard
             </span>
           </Link>
-          <Link
-            href="/setting"
-            prefetch={false}
-            className="flex items-center gap-2 px-4 py-4 hover:bg-gray-50 border-b border-gray-200 transition-colors outline-none focus:bg-gray-50"
-            role="menuitem"
-          >
-            <Settings className="w-5 h-5 text-gray-500" />
-            <span className="text-gray-700 text-sm font-medium font-inter">
-              Settings
-            </span>
-          </Link>
+          {showSettings && (
+            <Link
+              href="/setting"
+              prefetch={false}
+              className="flex items-center gap-2 px-4 py-4 hover:bg-gray-50 border-b border-gray-200 transition-colors outline-none focus:bg-gray-50"
+              role="menuitem"
+            >
+              <Settings className="w-5 h-5 text-gray-500" />
+              <span className="text-gray-700 text-sm font-medium font-inter">
+                Settings
+              </span>
+            </Link>
+          )}
         </nav>
       </PopoverContent>
     </Popover>
