@@ -62,3 +62,4 @@ class UserConfig(BaseModel):
     LLM: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
     GOOGLE_API_KEY: Optional[str] = None
+    COHERE_API_KEY: Optional[str] = None

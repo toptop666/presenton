@@ -80,6 +80,19 @@ Before following these steps make sure [Poetry](https://python-poetry.org/docs/)
 ## Community
 [Discord](https://discord.gg/VR89exqQ)
 
+## configuration
+
+configuring the server side is done via env variables
+
+### 1. Configuring LLM
+supported LLMs are openai, google, cohere. to choose the provider enter  ```export LLM="<one of the 3 providers>```
+
+### 2. Configuring API key
+each provider needs a API key as a env variable, check out the provider's documantation for the correct env (for example, cohere is CO_API_KEY)
+
+### 3. Configure create images
+on default, images will not be genarated, if you wish to genarate images, set USE_IMAGES=yes
+
 ## License
 
 Apache 2.0

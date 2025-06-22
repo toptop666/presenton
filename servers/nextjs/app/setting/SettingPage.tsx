@@ -22,6 +22,16 @@ const PROVIDER_CONFIGS: Record<string, ProviderConfig> = {
         description: "Required for using Google services",
         placeholder: "Enter your Google API key",
     },
+    cohere: {
+        title: "Antropic API Key",
+        description: "Required for using Antropic services",
+        placeholder: "Enter your Antropic API key",
+    },
+    lite: {
+        title: "liteLLM API Key",
+        description: "Required for using liteLLM services",
+        placeholder: "Enter your liteLLM API key",
+    }
 };
 
 interface ProviderConfig {

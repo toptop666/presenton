@@ -1,12 +1,15 @@
 import asyncio
 import os
 from typing import List
+
 from langchain_core.documents import Document
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import BaseMessage
 from langchain_text_splitters import CharacterTextSplitter
+
+from llm_usage_mask import get_model
 
 sysmte_prompt = """
 Generate a blog-style summary of the provided document in **more than 2000 words**, focusing on **prominently featuring any numerical data and statistics**. Maintain as much information as possible.
@@ -36,9 +39,7 @@ prompt_template = ChatPromptTemplate.from_messages(
 
 async def generate_document_summary(documents: List[Document]):
     model = (
-        ChatOpenAI(model="gpt-4.1-nano", max_completion_tokens=8000)
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=8000)
+        get_model(False, "no", 8000)
     )
     # text_splitter = CharacterTextSplitter.from_tiktoken_encoder(
     #     encoding_name="cl100k_base", chunk_size=200000, chunk_overlap=0

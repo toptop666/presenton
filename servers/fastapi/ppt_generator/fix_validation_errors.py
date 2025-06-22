@@ -5,6 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, ValidationError
 
+from llm_usage_mask import get_model
 
 def get_prompt_template():
     return ChatPromptTemplate(
@@ -39,9 +40,7 @@ def get_prompt_template():
 
 async def fix_validation_errors(response_model: BaseModel, response, errors):
     model = (
-        ChatOpenAI(model="o3-mini", reasoning_effort="high")
-        if os.getenv("LLM") == "openai"
-        else ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
+        get_model(True, 'high')
     )
 
     chain = get_prompt_template() | model.with_structured_output(
