@@ -84,14 +84,25 @@ Before following these steps make sure [Poetry](https://python-poetry.org/docs/)
 
 configuring the server side is done via env variables
 
-### 1. Configuring LLM
-supported LLMs are openai, google, cohere. to choose the provider enter  ```export LLM="<one of the 3 providers>```
+added support for cohere antropic API + liteLLM API
+to choose the model you want to use set the environmental variable LLM to one of the following: "openai": chatGPT, "google": gemini, "cohere": command-A, "lite": liteLLM.
+when not using liteLLM you will need to provide a API key in one of the following environmental variables:
 
-### 2. Configuring API key
-each provider needs a API key as a env variable, check out the provider's documantation for the correct env (for example, cohere is CO_API_KEY)
+OPENAI_API_KEY
+GOOGLE_API_KEY
+COHERE_API_KEY
+for liteLLM supported added the following environmental variables that are needed to be defined:
 
-### 3. Configure create images
-on default, images will not be genarated, if you wish to genarate images, set USE_IMAGES=yes
+LITELLM_REASONING_MODEL - name of the reasoning model to use
+LITELLM_MODEL_ALIAS - name of the base model to use
+LITELLM_PROXY_BASE_URL - the proxy URL liteLLM sits in
+LITELLM_API_KEY - the API_KEY to liteLLM
+added a environmental variable that allows to turn off image creation (will use template type 2 slide for the opening slide)
+
+USE_IMAGES - "yes" will create images, will not otherwise
+added the option to turn off the user's settings (will not be able to choose model and view API key)
+
+NEXT_PUBLIC_SHOW_SETTINGS - "true" will allow the user to access, will not otherwise
 
 ## License
 
