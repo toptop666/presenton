@@ -20,11 +20,17 @@ export const hasValidLLMConfig = (llmConfig: LLMConfig) => {
   const GOOGLE_API_KEY = llmConfig.GOOGLE_API_KEY;
   const OLLAMA_MODEL = llmConfig.OLLAMA_MODEL;
   const PEXELS_API_KEY = llmConfig.PEXELS_API_KEY;
+  const COHERE_API_KEY = llmConfig.COHERE_API_KEY;
+  const LITELLM_API_KEY = llmConfig.LITELLM_API_KEY;
   return llmConfig.LLM === 'openai' ?
     OPENAI_API_KEY !== '' && OPENAI_API_KEY !== null && OPENAI_API_KEY !== undefined :
     llmConfig.LLM === 'google' ?
       GOOGLE_API_KEY !== '' && GOOGLE_API_KEY !== null && GOOGLE_API_KEY !== undefined :
       llmConfig.LLM === 'ollama' ?
         PEXELS_API_KEY !== '' && PEXELS_API_KEY !== null && PEXELS_API_KEY !== undefined && OLLAMA_MODEL !== '' && OLLAMA_MODEL !== null && OLLAMA_MODEL !== undefined :
+        llmConfig.LLM === 'cohere' ?
+          COHERE_API_KEY !== '' && COHERE_API_KEY !== null && COHERE_API_KEY !== undefined :
+            llmConfig.LLM === 'lite' ?
+              LITELLM_API_KEY !== '' && LITELLM_API_KEY !== null && LITELLM_API_KEY !== undefined :
         false;
 }

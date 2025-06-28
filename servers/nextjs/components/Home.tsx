@@ -99,6 +99,70 @@ const PROVIDER_CONFIGS: Record<string, ProviderConfig> = {
             docsUrl: "https://aistudio.google.com/app/apikey",
         },
     },
+    cohere: {
+        textModels: [
+            {
+                value: "command-a",
+                label: "command-a",
+                description: "Balanced model for most tasks",
+                icon: "/icons/google.png",
+                size: "8GB",
+            },
+        ],
+        imageModels: [
+            {
+                value: "imagen",
+                label: "Imagen",
+                description: "Google's primary image generation model",
+                icon: "/icons/google.png",
+                size: "8GB",
+            },
+        ],
+        apiGuide: {
+            title: "How to get your Google AI Studio API Key",
+            steps: [
+                "Visit aistudio.google.com",
+                'Click on "Get API key" in the top navigation',
+                'Click "Create API key" on the next page',
+                'Choose either "Create API Key in new Project" or select an existing project',
+                "Copy your API key - you're ready to go!",
+            ],
+            videoUrl: "https://www.youtube.com/watch?v=o8iyrtQyrZM&t=66s",
+            docsUrl: "https://aistudio.google.com/app/apikey",
+        },
+    },
+    lite: {
+        textModels: [
+            {
+                value: "litellm",
+                label: "litellm",
+                description: "Balanced model for most tasks",
+                icon: "/icons/google.png",
+                size: "8GB",
+            },
+        ],
+        imageModels: [
+            {
+                value: "imagen",
+                label: "Imagen",
+                description: "Google's primary image generation model",
+                icon: "/icons/google.png",
+                size: "8GB",
+            },
+        ],
+        apiGuide: {
+            title: "How to get your Google AI Studio API Key",
+            steps: [
+                "Visit aistudio.google.com",
+                'Click on "Get API key" in the top navigation',
+                'Click "Create API key" on the next page',
+                'Choose either "Create API Key in new Project" or select an existing project',
+                "Copy your API key - you're ready to go!",
+            ],
+            videoUrl: "https://www.youtube.com/watch?v=o8iyrtQyrZM&t=66s",
+            docsUrl: "https://aistudio.google.com/app/apikey",
+        },
+    },
     ollama: {
         textModels: [
             {
@@ -181,6 +245,10 @@ export default function Home() {
             setLlmConfig({ ...llmConfig, GOOGLE_API_KEY: newApiKey });
         } else if (llmConfig.LLM === 'ollama') {
             setLlmConfig({ ...llmConfig, PEXELS_API_KEY: newApiKey });
+        } else if (llmConfig.LLM === 'lite') {
+            setLlmConfig({ ...llmConfig, LITELLM_API_KEY: newApiKey});
+        } else if (llmConfig.LLM === 'cohere') {
+            setLlmConfig({ ...llmConfig, COHERE_API_KEY: newApiKey});
         }
     }
 

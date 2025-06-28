@@ -62,8 +62,12 @@ class UserConfig(BaseModel):
     LLM: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
     GOOGLE_API_KEY: Optional[str] = None
+    COHERE_API_KEY: Optional[str] = None
     OLLAMA_MODEL: Optional[str] = None
     PEXELS_API_KEY: Optional[str] = None
+    LITELLM_API_KEY: Optional[str] = None
+    LITELLM_MODEL_ALIAS: Optional[str] = None
+    LITELLM_PROXY_BASE_URL: Optional[str] = None
 
 
 class OllamaModelMetadata(BaseModel):
@@ -73,4 +77,3 @@ class OllamaModelMetadata(BaseModel):
     icon: str
     size: str
     supports_graph: bool
-    COHERE_API_KEY: Optional[str] = None

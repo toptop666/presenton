@@ -19,4 +19,6 @@ interface LLMConfig {
   GOOGLE_API_KEY?: string;
   PEXELS_API_KEY?: string;
   OLLAMA_MODEL?: string;
+  COHERE_API_KEY?: string;
+  LITELLM_API_KEY?: string;
 }

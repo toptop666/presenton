@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
 
 # Change working directory
 WORKDIR /app
+COPY docker-dev-start.sh .
 
 RUN ls -a
 

@@ -21,6 +21,16 @@ const PROVIDER_CONFIGS: Record<string, ProviderConfig> = {
         description: "Required for using Google services",
         placeholder: "Enter your Google API key",
     },
+    cohere: {
+        title: "cohere API Key",
+        description: "Required for using cohere services",
+        placeholder: "Enter your cohere API key",
+    },
+    lite: {
+        title: "liteLLM API Key",
+        description: "Required for using liteLLM services",
+        placeholder: "Enter your liteLLM API key",
+    },
     ollama: {
         title: "Ollama API Key",
         description: "Required for using Ollama services",
@@ -63,6 +73,10 @@ const SettingsPage = () => {
             setLlmConfig({ ...llmConfig, GOOGLE_API_KEY: apiKey });
         } else if (llmConfig.LLM === 'ollama') {
             setLlmConfig({ ...llmConfig, PEXELS_API_KEY: apiKey });
+        } else if (llmConfig.LLM === 'lite') {
+            setLlmConfig({ ...llmConfig, LITELLM_API_KEY: apiKey});
+        } else if (llmConfig.LLM === 'cohere') {
+            setLlmConfig({ ...llmConfig, COHERE_API_KEY: apiKey});
         }
     }
 

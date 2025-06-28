@@ -38,6 +38,8 @@ export async function POST(request: Request) {
     GOOGLE_API_KEY: userConfig.GOOGLE_API_KEY || existingConfig.GOOGLE_API_KEY,
     OLLAMA_MODEL: userConfig.OLLAMA_MODEL || existingConfig.OLLAMA_MODEL,
     PEXELS_API_KEY: userConfig.PEXELS_API_KEY || existingConfig.PEXELS_API_KEY,
+    LITELLM_API_KEY: userConfig.LITELLM_API_KEY || existingConfig.LITELLM_API_KEY,
+    COHERE_API_KEY: userConfig.COHERE_API_KEY || existingConfig.COHERE_API_KEY,
   }
   fs.writeFileSync(userConfigPath, JSON.stringify(mergedConfig))
   return NextResponse.json(mergedConfig)
